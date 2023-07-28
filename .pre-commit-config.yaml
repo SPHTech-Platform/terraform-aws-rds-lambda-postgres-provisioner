@@ -1,21 +1,53 @@
 repos:
-  - repo: git://github.com/antonbabenko/pre-commit-terraform
-    rev: v1.48.0
+  - repo: https://github.com/gruntwork-io/pre-commit
+    rev: v0.1.22
+    hooks:
+      - id: shellcheck
+
+  - repo: https://github.com/tcort/markdown-link-check
+    rev: v3.11.2
+    hooks:
+      - id: markdown-link-check
+        args:
+          - "--config=mlc_config.json"
+
+  - repo: https://github.com/antonbabenko/pre-commit-terraform
+    rev: v1.81.0
     hooks:
       - id: terraform_fmt
+      - id: terraform_providers_lock
+        args:
+          - --args=-platform=linux_amd64
+          - --hook-config=--mode=only-check-is-current-lockfile-cross-platform
       - id: terraform_validate
-      - id: terraform_docs
       - id: terraform_tflint
         args:
-          - '--args=--config=__GIT_WORKING_DIR__/.tflint.hcl'
-          - '--args=--format=compact'
-        require_serial: true
+          - --args=--module
+          - --args=--config=__GIT_WORKING_DIR__/.tflint.hcl
+      - id: terraform_docs
+        args:
+          - --hook-config=--path-to-file=README.md
+          - --hook-config=--add-to-existing-file=true
+          - --hook-config=--recursive=true
       - id: terraform_tfsec
         args:
-          - '--args=--exclude-downloaded-modules --concise-output'
-        require_serial: true
-        exclude: ^examples/
-  - repo: git://github.com/pre-commit/pre-commit-hooks
-    rev: v3.4.0
+          - --args=--exclude-downloaded-modules
+      - id: terraform_checkov
+
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.4.0
     hooks:
+      # Git style
       - id: check-merge-conflict
+      - id: check-merge-conflict
+      - id: no-commit-to-branch
+
+      # Common errors
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: check-yaml
+
+      # Security
+      - id: detect-aws-credentials
+        args: ["--allow-missing-credentials"]
+      - id: detect-private-key
