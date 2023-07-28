@@ -7,8 +7,8 @@ on:
       - master
 
 env:
-  node-version: '14'
-  python-version: '3.8'
+  node-version: '16'
+  python-version: '3.9'
   function-source-code-dir: ./source-code
   packaged-function-dir: ./packaged
 

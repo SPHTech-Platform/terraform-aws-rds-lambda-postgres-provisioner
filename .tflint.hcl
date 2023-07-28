@@ -1,26 +1,10 @@
-config {
-  module = false
-  force = false
-  disabled_by_default = true
-}
-
 plugin "aws" {
-  enabled = false
+  enabled = true
+  version = "0.23.1"
+  source  = "github.com/terraform-linters/tflint-ruleset-aws"
 }
 
 rule "terraform_deprecated_interpolation" {
-  enabled = true
-}
-
-rule "terraform_deprecated_index" {
-  enabled = true
-}
-
-rule "terraform_unused_declarations" {
-  enabled = true
-}
-
-rule "terraform_comment_syntax" {
   enabled = true
 }
 
@@ -32,20 +16,16 @@ rule "terraform_documented_variables" {
   enabled = true
 }
 
-rule "terraform_typed_variables" {
-  enabled = true
-}
-
 rule "terraform_module_pinned_source" {
   enabled = true
 }
 
-rule "terraform_naming_convention" {
+rule "terraform_typed_variables" {
   enabled = true
 }
 
 rule "terraform_required_version" {
-  enabled = true
+  enabled = false
 }
 
 rule "terraform_required_providers" {
@@ -53,9 +33,27 @@ rule "terraform_required_providers" {
 }
 
 rule "terraform_standard_module_structure" {
+  enabled = false
+}
+
+rule "terraform_unused_declarations" {
   enabled = true
 }
 
-rule "terraform_workspace_remote" {
+rule "terraform_unused_required_providers" {
+  enabled = true
+}
+
+# rule "aws_resource_missing_tags" {
+#   enabled = true
+#   tags = [
+#     "cost-cen",
+#     "env",
+#     "owner",
+#     "hello",
+#   ]
+# }
+
+rule "terraform_naming_convention" {
   enabled = true
 }
