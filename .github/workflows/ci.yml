@@ -1,0 +1,15 @@
+name: terraform-ci
+on:
+  pull_request:
+permissions:
+  actions: read
+  checks: read
+  contents: read
+  pull-requests: read
+
+jobs:
+  ci:
+    uses: SPHTech-Platform/reusable-workflows/.github/workflows/terraform.yaml@v2
+    with:
+      upload_sarif: false
+    secrets: inherit
