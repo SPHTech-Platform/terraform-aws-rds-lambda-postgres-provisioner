@@ -53,4 +53,10 @@ variable "rds_user_secret_name" {
 variable "rds_master_user_secret_name" {
   type        = string
   description = "values of rds master user secret name"
+  value       = null
+}
+
+variable "rds_master_user_secret_arn" {
+  type        = string
+  description = "values of rds master user secret arn"
 }
