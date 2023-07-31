@@ -1,8 +1,8 @@
 # module "db_provisioner" {
 
 #   source      = "SPHTech-Platform/rds-lambda-postgres-provisioner/aws"
-#   version     = "0.1.1"
-#   lambda_name = "appsec"
+#   version     = "0.1.4"
+#   lambda_name = "anyname"
 
 #   #Insert your RDS module here
 #   rds_endpoint               = module.rds_aurora_postgres_testing.cluster_endpoint
@@ -23,8 +23,8 @@
 #   invoke = true
 
 #   depends_on = [
-#     module.rds_aurora_postgres_testing,
-#     module.rds_user_secret #Insert your RDS module here
+#     module.rds_aurora_postgres_testing, #Insert your RDS module here
+#     module.rds_user_secret
 #   ]
 # }
 
@@ -34,7 +34,6 @@
 #   special = false
 # }
 
-# mlflow RDS admin user
 # module "rds_user_secret" {
 #   source = "../../../modules/secretmanager"
 
