@@ -1,3 +1,9 @@
+locals {
+  secret_name_with_postfix = element(split(":", var.rds_master_user_secret_arn), length(split(":", var.rds_master_user_secret_arn)) - 1)
+  segments                 = split("-", local.secret_name_with_postfix)
+  master_user_secret_name  = join("-", slice(local.segments, 0, length(local.segments) - 1))
+}
+
 module "provisoner_lambda" {
   source  = "terraform-aws-modules/lambda/aws"
   version = "~> 5.0"
@@ -46,7 +52,7 @@ module "provisoner_lambda" {
     RDS_HOST                      = var.rds_endpoint
     RDS_PORT                      = var.rds_port
     DB_USER_SECRET_MANAGER_NAME   = var.rds_user_secret_name
-    DB_MASTER_SECRET_MANAGER_NAME = var.rds_master_user_secret_name
+    DB_MASTER_SECRET_MANAGER_NAME = var.rds_master_user_secret_name != null ? var.rds_master_user_secret_name : local.master_user_secret_name
   }
 
   layers = [
