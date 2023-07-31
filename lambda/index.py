@@ -54,7 +54,6 @@ def provision_db_and_user(master_secrets_json, secret_json):
     username = secret_json['username']
     password = secret_json['password']
     database_name = secret_json['database']
-    grant_perms_string = secret_json['grantperms']
 
     master_username = master_secrets_json['username']
     master_password = master_secrets_json['password']
@@ -77,8 +76,11 @@ def provision_db_and_user(master_secrets_json, secret_json):
         # Grant privileges
         grant_sql = "GRANT CONNECT ON DATABASE {} TO {};".format(
             database_name, username)
-        grant_sql += "GRANT {} ON ALL TABLES IN SCHEMA public TO {};".format(
-            grant_perms_string, username)
+        grant_sql += "GRANT ALL PRIVILEGES ON DATABASE {} TO {};".format(
+            database_name, username)
+        grant_sql += "GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO {};".format(
+            username)
+
         cursor.execute(grant_sql)
 
         # Close communication with the database
