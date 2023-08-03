@@ -68,13 +68,13 @@ def provision_db_and_user(master_secrets_json, secret_json):
         # Create database
         create_database = os.environ['CREATE_DATABASE']
         if create_database == "true":
-            try: 
+            try:
                 sql = "CREATE DATABASE {};".format(database_name)
                 cursor.execute(sql)
             except errors.DuplicateDatabase as e:
                 print('Database already exists')
                 pass
-            
+
         # Create user
         sql = "CREATE USER {} WITH PASSWORD '{}' CREATEDB;".format(
             username, password)
