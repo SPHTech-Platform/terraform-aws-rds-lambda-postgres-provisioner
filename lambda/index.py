@@ -64,6 +64,12 @@ def provision_db_and_user(master_secrets_json, secret_json):
         conn.autocommit = True
         cursor = conn.cursor()
 
+        # Create database
+        create_database = os.environ['CREATE_DATABASE']
+        if create_database == "true":
+            sql = "CREATE DATABASE {};".format(database_name)
+            cursor.execute(sql)
+
         # Create user
         sql = "CREATE USER {} WITH PASSWORD '{}' CREATEDB;".format(
             username, password)

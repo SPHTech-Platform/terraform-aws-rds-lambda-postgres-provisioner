@@ -19,6 +19,12 @@ variable "vpc_config" {
   description = "VPC configuration for Lambda function"
 }
 
+variable "create_database" {
+  type        = bool
+  default     = true
+  description = "Flag to create database or not"
+}
+
 variable "invoke" {
   type        = bool
   default     = true

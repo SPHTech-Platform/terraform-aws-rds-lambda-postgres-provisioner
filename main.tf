@@ -51,6 +51,7 @@ module "provisoner_lambda" {
   environment_variables = {
     RDS_HOST                      = var.rds_endpoint
     RDS_PORT                      = var.rds_port
+    CREATE_DATABASE               = var.create_database ? "true" : "false"
     DB_USER_SECRET_MANAGER_NAME   = var.rds_user_secret_name
     DB_MASTER_SECRET_MANAGER_NAME = var.rds_master_user_secret_name != null ? var.rds_master_user_secret_name : local.master_user_secret_name
   }
