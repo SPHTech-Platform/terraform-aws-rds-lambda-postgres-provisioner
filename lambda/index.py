@@ -1,6 +1,5 @@
 import boto3
 import json
-import random
 import string
 import os
 import logging
@@ -76,13 +75,12 @@ def provision_db_and_user(master_secrets_json, secret_json):
                 pass
 
         # Create user
-        sql = "CREATE USER {} WITH PASSWORD '{}' CREATEDB;".format(
-            username, password)
-        cursor.execute(sql)
-
-        # Create database
-        query = "CREATE DATABASE {};".format(database_name)
-        cursor.execute(query)
+        usernames = get_pg_usernames(cursor)
+        if username in usernames:
+            print("User already exists - skipping creation of user")
+        else:
+            sql = "CREATE USER {} WITH PASSWORD '{}' CREATEDB;".format(username, password)
+            cursor.execute(sql)
 
         # Grant privileges
         grant_sql = "GRANT CONNECT ON DATABASE {} TO {};".format(
@@ -101,6 +99,14 @@ def provision_db_and_user(master_secrets_json, secret_json):
         print('Error performing provisioning: ', str(e))
         raise e
 # end def
+
+def get_pg_usernames(cursor):
+    query = "SELECT u.usename AS username FROM pg_catalog.pg_user u;"
+    rows = []
+    cursor.execute(query)
+    for row in cursor:
+        rows.append(row[0])
+    return rows
 
 def test_db_connection(username, password, database_name, rds_host, rds_port):
     '''Test if the database can be connected using the new password'''
