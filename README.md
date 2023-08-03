@@ -11,7 +11,7 @@
 
 | Name | Version |
 |------|---------|
-| <a name="provider_aws"></a> [aws](#provider\_aws) | >= 4.0 |
+| <a name="provider_aws"></a> [aws](#provider\_aws) | 5.10.0 |
 
 ## Modules
 
@@ -31,6 +31,7 @@
 
 | Name | Description | Type | Default | Required |
 |------|-------------|------|---------|:--------:|
+| <a name="input_create_database"></a> [create\_database](#input\_create\_database) | Flag to create database or not | `bool` | `true` | no |
 | <a name="input_enabled"></a> [enabled](#input\_enabled) | Defines whether this module should create resources | `bool` | `true` | no |
 | <a name="input_invoke"></a> [invoke](#input\_invoke) | Defines whether lambda function should be invoked immediately after provisioning | `bool` | `true` | no |
 | <a name="input_lambda_name"></a> [lambda\_name](#input\_lambda\_name) | value of lambda name | `string` | n/a | yes |
