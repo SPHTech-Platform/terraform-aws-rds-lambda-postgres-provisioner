@@ -20,7 +20,7 @@ variable "vpc_config" {
 }
 
 variable "create_database" {
-  type        = boolean
+  type        = bool
   default     = true
   description = "Flag to create database or not"
 }
