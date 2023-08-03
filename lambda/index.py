@@ -3,8 +3,9 @@ import json
 import random
 import string
 import os
-import psycopg2
 import logging
+import psycopg2
+from psycopg2 import errors
 
 
 def lambda_handler(event, context):
@@ -67,9 +68,13 @@ def provision_db_and_user(master_secrets_json, secret_json):
         # Create database
         create_database = os.environ['CREATE_DATABASE']
         if create_database == "true":
-            sql = "CREATE DATABASE {};".format(database_name)
-            cursor.execute(sql)
-
+            try: 
+                sql = "CREATE DATABASE {};".format(database_name)
+                cursor.execute(sql)
+            except errors.DuplicateDatabase as e:
+                print('Database already exists')
+                pass
+            
         # Create user
         sql = "CREATE USER {} WITH PASSWORD '{}' CREATEDB;".format(
             username, password)
@@ -96,7 +101,6 @@ def provision_db_and_user(master_secrets_json, secret_json):
         print('Error performing provisioning: ', str(e))
         raise e
 # end def
-
 
 def test_db_connection(username, password, database_name, rds_host, rds_port):
     '''Test if the database can be connected using the new password'''
