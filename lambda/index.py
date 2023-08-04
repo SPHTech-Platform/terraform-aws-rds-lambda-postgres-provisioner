@@ -101,6 +101,7 @@ def get_pg_usernames(cursor):
     for row in cursor:
         rows.append(row[0])
     return rows
+# end def
 
 def create_database(master_username, master_password, rds_host, rds_port, database_name):
     conn = psycopg2.connect(user=master_username, password=master_password,
@@ -109,18 +110,17 @@ def create_database(master_username, master_password, rds_host, rds_port, databa
     cursor = conn.cursor()
 
     # Create database
-    create_database_flag = os.environ['CREATE_DATABASE']
-    if create_database_flag == "true":
-        try:
-            sql = "CREATE DATABASE {};".format(database_name)
-            cursor.execute(sql)
-        except errors.DuplicateDatabase as e:
-            print('Database already exists')
-            pass
+    try:
+        sql = "CREATE DATABASE {};".format(database_name)
+        cursor.execute(sql)
+    except errors.DuplicateDatabase as e:
+        print('Database already exists')
+        pass
 
     cursor.close()
     conn.close()
-    
+# enbd def
+
 def test_db_connection(username, password, database_name, rds_host, rds_port):
     '''Test if the database can be connected using the new password'''
 
