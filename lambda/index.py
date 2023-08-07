@@ -80,7 +80,7 @@ def provision_db_and_user(master_secrets_json, secret_json):
 
         # Grant privileges
         grant_sql = "GRANT CONNECT ON DATABASE {} TO {};".format(database_name, username)
-        grant_sql = "GRANT ALL PRIVILEGES ON DATABASE {} TO {};".format(database_name, username)
+        grant_sql += "GRANT ALL PRIVILEGES ON DATABASE {} TO {};".format(database_name, username)
         grant_sql += "GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO {};".format(username)
         grant_sql += "GRANT ALL PRIVILEGES ON ALL SEQUENCES IN SCHEMA public TO {};".format(username)
         grant_sql += "GRANT ALL PRIVILEGES ON ALL FUNCTIONS IN SCHEMA public TO {};".format(username)
