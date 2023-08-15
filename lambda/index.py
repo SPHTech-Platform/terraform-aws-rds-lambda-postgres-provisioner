@@ -62,7 +62,7 @@ def provision_db_and_user(master_secrets_json, secret_json):
         # Create database
         create_database_flag = os.environ['CREATE_DATABASE']
         if create_database_flag == "true":
-            create_database(master_username, master_password, rds_host, rds_port, "postgres")
+            create_database(master_username, master_password, rds_host, rds_port, database_name)
 
         # Connect to newly created database
         conn = psycopg2.connect(user=master_username, password=master_password,
