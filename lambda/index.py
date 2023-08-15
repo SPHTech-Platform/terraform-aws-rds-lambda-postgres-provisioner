@@ -107,7 +107,7 @@ def get_pg_usernames(cursor):
 
 def create_database(master_username, master_password, rds_host, rds_port, database_name):
     conn = psycopg2.connect(user=master_username, password=master_password,
-                                host=rds_host, port=rds_port, dbname=database_name)
+                                host=rds_host, port=rds_port, dbname="postgres")
     conn.autocommit = True
     cursor = conn.cursor()
 
