@@ -15,6 +15,7 @@ module "provisoner_lambda" {
 
   source_path = "${path.module}/lambda"
 
+  cloudwatch_logs_retention_in_days       = 30
   create_current_version_allowed_triggers = false
 
   vpc_subnet_ids         = var.vpc_config.subnet_ids
