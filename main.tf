@@ -10,7 +10,7 @@ module "provisoner_lambda" {
 
   function_name = "${var.lambda_name}-db-provisioner"
   handler       = "index.lambda_handler"
-  runtime       = "python3.9"
+  runtime       = "python3.12"
   timeout       = var.timeout
 
   source_path = "${path.module}/lambda"
