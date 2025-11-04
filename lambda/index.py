@@ -3,8 +3,8 @@ import json
 import string
 import os
 import logging
-import psycopg2
-from psycopg2 import errors
+import psycopg
+from psycopg import errors
 
 
 def lambda_handler(event, context):
