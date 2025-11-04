@@ -42,3 +42,4 @@ override.tf.json
 
 # NodeJS
 node_modules/
+lambda_layers/.DS_Store

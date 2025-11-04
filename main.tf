@@ -82,9 +82,9 @@ data "aws_lambda_invocation" "default" {
 
 resource "aws_lambda_layer_version" "psycopg2_lambda_layer" {
   layer_name  = "psycopg2"
-  description = "A layer to enable psycopg2 for python3.9"
+  description = "A layer to enable psycopg2 for python3.12"
 
-  filename                 = "${path.module}/lambda_layers/psycopg2_python3.9.zip"
-  compatible_runtimes      = ["python3.9"]
+  filename                 = "${path.module}/lambda_layers/psycopg2_python3.12.zip"
+  compatible_runtimes      = ["python3.12"]
   compatible_architectures = ["x86_64"]
 }
