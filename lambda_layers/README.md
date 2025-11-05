@@ -6,7 +6,7 @@
 
 3) source .myenv/bin/activate
 
-4) 
+4) Create folder python and install 
 
 pip install \
   --platform manylinux2014_x86_64 \
@@ -16,6 +16,6 @@ pip install \
   --only-binary=:all: \
   psycopg2-binary
 
-5) zip -r psycopg2-pythonVERSION.zip python
+5) zip -r psycopg2_python3.12.zip python
 
-6)  Add zip file in this folder
+6)  Add zip file in this folder (/lambda_layer)
