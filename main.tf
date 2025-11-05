@@ -11,7 +11,7 @@ module "provisoner_lambda" {
   function_name = "${var.lambda_name}-db-provisioner"
   handler       = "index.lambda_handler"
   runtime       = "python3.12"
-  architectures = ["arm64"]
+  architectures = ["x86_64"]
   timeout       = var.timeout
 
   source_path = "${path.module}/lambda"
@@ -87,5 +87,5 @@ resource "aws_lambda_layer_version" "psycopg2_lambda_layer" {
 
   filename                 = "${path.module}/lambda_layers/psycopg2_python3.12.zip"
   compatible_runtimes      = ["python3.12"]
-  compatible_architectures = ["arm64"]
+  compatible_architectures = ["x86_64"]
 }
