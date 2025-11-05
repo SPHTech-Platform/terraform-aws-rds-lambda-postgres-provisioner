@@ -18,4 +18,4 @@ pip install \
 
 5) zip -r psycopg2_python3.12.zip python
 
-6)  Add zip file in this folder (/lambda_layer)
+6) Add zip file in this folder (/lambda_layer)
