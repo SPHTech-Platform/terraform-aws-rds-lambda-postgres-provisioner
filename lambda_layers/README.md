@@ -6,7 +6,7 @@
 
 3) source .myenv/bin/activate
 
-4) Create folder python and install 
+4) Create folder python and install
 
 pip install \
   --platform manylinux2014_x86_64 \
