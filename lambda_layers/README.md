@@ -2,7 +2,7 @@
 
 1) Create folder, psycopg2_layer
 
-2) python3.12 -m venv .myenv 
+2) python3.12 -m venv .myenv
 
 3) source .myenv/bin/activate
 
